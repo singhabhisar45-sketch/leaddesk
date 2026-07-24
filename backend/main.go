@@ -451,6 +451,50 @@ func main() {
 		http.NotFound(w, r)
 	})
 
+	// Serve the Flutter frontend (Single Page Application)
+	frontendPath := envOr("FRONTEND_PATH", "../build/web")
+	fs := http.FileServer(http.Dir(frontendPath))
+	mux.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
+		// If it's an API route that wasn't matched, return 404, don't serve HTML
+		if strings.HasPrefix(r.URL.Path, "/api/") {
+			http.NotFound(w, r)
+			return
+		}
+		
+		path := frontendPath + r.URL.Path
+		info, err := os.Stat(path)
+		if os.IsNotExist(err) || (err == nil && info.IsDir()) {
+			// Route to index.html for Flutter's internal navigation (/admin)
+			http.ServeFile(w, r, frontendPath+"/index.html")
+			return
+		}
+		
+		// Serve static assets (js, css, png, canvaskit)
+		fs.ServeHTTP(w, r)
+	})
+
+	// Serve the Flutter frontend (Single Page Application)
+	frontendPath := envOr("FRONTEND_PATH", "../build/web")
+	fs := http.FileServer(http.Dir(frontendPath))
+	mux.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
+		// If it's an API route that wasn't matched, return 404, don't serve HTML
+		if strings.HasPrefix(r.URL.Path, "/api/") {
+			http.NotFound(w, r)
+			return
+		}
+		
+		path := frontendPath + r.URL.Path
+		info, err := os.Stat(path)
+		if os.IsNotExist(err) || (err == nil && info.IsDir()) {
+			// Route to index.html for Flutter's internal navigation (/admin)
+			http.ServeFile(w, r, frontendPath+"/index.html")
+			return
+		}
+		
+		// Serve static assets (js, css, png, canvaskit)
+		fs.ServeHTTP(w, r)
+	})
+
 	// CORS: allows Flutter Web (running on a different port) to call this API
 	// In production set ALLOWED_ORIGIN=https://your-flutter-app.netlify.app
 	allowedOrigin := envOr("ALLOWED_ORIGIN", "*")
