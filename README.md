@@ -27,7 +27,7 @@ live url - https://resilient-monstera-e9dd9f.netlify.app/
  PATCH | /api/leads/{id}/status | Update lead status (JWT protected) |
  GET | /health | Health check endpoint |
 
-Authentication is implemented using JWT tokens. The frontend communicates with the Go backend hosted on AWS EC2 via REST APIs over HTTP on port 8080.
+Authentication is implemented using jwt tokens. The frontend communicates with the Go backend hosted on AWS EC2 via rest apis over http on port 8080.
 
 ##DATA FLOW
 
