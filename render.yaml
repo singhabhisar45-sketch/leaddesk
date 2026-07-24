@@ -1,0 +1,22 @@
+services:
+  - type: web
+    name: leaddesk-api
+    env: go
+    buildCommand: cd backend && go build -o app
+    startCommand: ./backend/app
+    envVars:
+      - key: ALLOWED_ORIGIN
+        value: https://your-netlify-app-url.netlify.app # UPDATE THIS AFTER NETLIFY DEPLOY
+      - key: ADMIN_PASSWORD
+        value: admin1234 # YOU MUST CHANGE THIS
+      - key: JWT_SECRET
+        generateValue: true
+      - key: DATABASE_URL
+        fromDatabase:
+          name: leaddesk-db
+          property: connectionString
+
+databases:
+  - name: leaddesk-db
+    databaseName: leaddesk
+    user: admin
