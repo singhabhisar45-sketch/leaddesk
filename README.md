@@ -3,11 +3,11 @@ live url - https://resilient-monstera-e9dd9f.netlify.app/
 ## Tech Stack
 
 ## Frontend
-- Flutter (Flutter Web)
+- flutter (flutter web)
 
 ## Backend
-- Golang
-- REST API
+- golang
+- rest api
 
 ## Database
 - PostgreSQL
@@ -21,13 +21,13 @@ live url - https://resilient-monstera-e9dd9f.netlify.app/
 
   Method | Endpoint | Description |
  -------- |----------|-------------|
- POST| /api/login | Authenticate admin and return JWT token |
- POST | /api/leads | Create a new lead |
- GET | /api/leads | Retrieve all leads (JWT protected) |
- PATCH | /api/leads/{id}/status | Update lead status (JWT protected) |
- GET | /health | Health check endpoint |
+ POST| /api/login | authenticate admin and return jwt token |
+ POST | /api/leads | create a new lead |
+ GET | /api/leads | retrieve all leads (jwt protected) |
+ PATCH | /api/leads/{id}/status | update lead status (jwt protected) |
+ GET | /health | health check endpoint |
 
-Authentication is implemented using jwt tokens. The frontend communicates with the Go backend hosted on AWS EC2 via rest apis over http on port 8080.
+authentication is implemented using jwt tokens. The frontend communicates with the Go backend hosted on AWS EC2 via rest apis over http on port 8080.
 
 ##DATA FLOW
 
@@ -36,17 +36,17 @@ Landing Page
 POST /api/leads
       │
       ▼
-Go Backend
+Go backend
       │
       ▼
-PostgreSQL
+Postgresql
 
 
-Admin Login
+Admin login
       │
 POST /api/login
       │
-JWT Token
+jwt token
       │
       ▼
 GET /api/leads
