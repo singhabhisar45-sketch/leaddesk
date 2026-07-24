@@ -53,4 +53,4 @@ GET /api/leads
 PATCH /api/leads/{id}/status
 
 Creation :
-- created the whole application with the ai assitant as my partner for heavylifting and lenghty work like writing the codes , then i read the codes to find any loops and missing function in it , after all ok, i started my server and deployed the web ,
+- created the whole application with the ai assitant as my partner for heavylifting and lenghty work like writing the codes , then i read the codes to find any loops and missing function in it , after all ok, i started my server and deployed the web .
